@@ -1,21 +1,14 @@
-Aquí tienes las preguntas con sus respuestas redactadas con el nivel técnico adecuado para que las copies y pegues directamente en el archivo `README.md` de tu repositorio:
+1. **¿Por qué la interfaz `HorarioRepository` no menciona Express, NestJS ni memoria?**
 
-**1. ¿Por qué esta interfaz (`MiembroRepository`) no menciona Express, NestJS ni memoria?**
-
-Porque es solamente un contrato, no se fija en la infraestrucutra, como se guarda o que frameworks utiliza, es una abstraccion
-
-**2. ¿Qué palabra de esa clase es la que promete cumplir la interfaz del paso anterior?**
+Define solo el contrato, no necesita saber de infraestructura, frameworks o bases de datos
 
 
-implements, es la palabra reservada para implementar o llevar acabo u ncontrato
+2. **¿Qué palabra de la clase `HorarioMemoriaRepository` es la que promete cumplir la interfaz del paso anterior?**
+implments, asegura de implmentar la interfaz
 
-**3. ¿Por qué este archivo (`miembros.service.ts`) no sabe qué es una petición HTTP?**
 
-porque es logica de negocio y reglas de la aplicacion
+3. **¿Por qué el servicio `HorariosService` no sabe qué es una petición HTTP?**
+es la logica de negocio, no necesita saber mas aparte de eso.
 
-**4. ¿Por qué el Service se inyecta sin token en el Controller, y el repositorio sí necesita uno?**
-porque service funciona en tiempo de ejecucion mientras que  el repositorio requiere un token flecha dirigido a la clase que necesita instanciar
-
-**5. ¿Qué prueba, en los hechos, que agregar Miembros no rompió nada de Inscripciones?**
-
-Que las rutas o endpoints hechos en la practica anterior siguen funcionando
+4. **Si mandas un `claseId` con un tipo de dato incorrecto, ¿qué código de estado esperarías y por qué este Controller no lo detecta?**
+un 400, el controller no lo detecta por que nose activaron validaciones, ni decoradores correspondiente en el dto para verificar los datos de entrada
