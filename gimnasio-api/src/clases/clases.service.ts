@@ -1,29 +1,42 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
+import type { ClaseRepository } from './dominio/clase.repository.js';
+import { ClaseMemoriaRepository } from './infra/clase-memoria.repository.js';
+import { CLASE_REPOSITORY } from './clases.token.js';
+import { CrearClaseDTO } from './dto/crear-clase.dto.js';
 
 export interface Clase{
   id: number;
   nombre: string;
 }
 
-const clases: Clase[] = [
-  { id: 1, nombre: 'Yoga' },
-  { id: 2, nombre: 'Pilates' },
-  { id: 3, nombre: 'Spinning' },
-];
+
 
 @Injectable()
 export class ClasesService { 
-    listar(): Clase[] {
-        return clases;
-    }
+    constructor(
+      @Inject(CLASE_REPOSITORY)
+      private readonly repo: ClaseRepository){
+      }
 
-    crear(nombre: string): Clase {
-       const nueva: Clase = {
-      id: clases.length + 1,
-      nombre: nombre
-  }
-    clases.push(nueva);
-    return nueva;
-    }
+      listar(): Promise<Clase[]>{
+        return this.repo.listar();
+      }
+      buscarPorId(id: number): Promise<Clase | null>{
+        return this.repo.buscarPorId(id);
+      }
+
+      crear(dtos: CrearClaseDTO): Promise<Clase>{
+        return this.repo.crear(dtos);
+      }
+
+      actualizar(id: number, dtos: CrearClaseDTO): Promise<Clase | null>{
+        return this.repo.actualizar(id, dtos);
+      }
+      eliminar(id: number): Promise<Clase | null>{
+        return this.repo.eliminar(id);
+      }
+
+
 }
+
 

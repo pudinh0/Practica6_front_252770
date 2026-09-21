@@ -1,27 +1,21 @@
-1- ¿Que pasaria sie el modulo no quedara registrado en la raiz?
+Aquí tienes las preguntas con sus respuestas redactadas con el nivel técnico adecuado para que las copies y pegues directamente en el archivo `README.md` de tu repositorio:
 
-NestJs no tendra conocimiento del modulo, no sabra que existe y no funcionara, hara las peticiones http a ese controlador y
-se obtendran un 404 de "not found" ya que no se encuentra el modulo
+**1. ¿Por qué esta interfaz (`MiembroRepository`) no menciona Express, NestJS ni memoria?**
 
-2-¿Por que los metodos del repositorio devuelve promesas si los datos van a estar en memoria?
-por la arquitectura utilizada y el desacoplamiento causado por lo asincrono, se definio la interfaz del
-reposiotiro utilizando promesas desde el inicio, el servicio espera operaciones asincronas
+Porque es solamente un contrato, no se fija en la infraestrucutra, como se guarda o que frameworks utiliza, es una abstraccion
 
-3-¿Que error aparecio al cambiar a la interfaz y porque la clase si se habia resuelto sola?
-el error era el de "Nest cant resolve dependencies" creo,  por que  se instancia por el nombre del tipo
-,eso requiere que utilize un token que contenga el tipo
+**2. ¿Qué palabra de esa clase es la que promete cumplir la interfaz del paso anterior?**
 
 
-4-¿por que el servicio necesita un token para el repositorio, pero el controlador no lo necesita para el servicio?
-se necesita un token porque el tipo de dato que se inyecta es una interfaz, esta desaparece en tiepmo de ejecucion,
-por eso necesita el token, que viene siendo el identificador para que nest sepa a que clase se asocia la interfaz
+implements, es la palabra reservada para implementar o llevar acabo u ncontrato
 
+**3. ¿Por qué este archivo (`miembros.service.ts`) no sabe qué es una petición HTTP?**
 
-5-¿diferencia entre 400 y 409?
-el 400 significa que el servidor no entiende la peticion, o que la estructura de la misma es incorrecta(falta de campos obligatorios
-tipo de dato erroneo, etc)
+porque es logica de negocio y reglas de la aplicacion
 
-el 409 este se refiere mas que nada a conflictos con el estado actual del servicio o sistema, ej. intentar inscribirse a una clase llena
+**4. ¿Por qué el Service se inyecta sin token en el Controller, y el repositorio sí necesita uno?**
+porque service funciona en tiempo de ejecucion mientras que  el repositorio requiere un token flecha dirigido a la clase que necesita instanciar
 
-6-¿por que cambio el codigo de estado de usa ultima peticion despues de cancelar?
-por que al cancelar una inscripcion que ya existia, se libero un espacio en ese horario en el repositorio en memoria
+**5. ¿Qué prueba, en los hechos, que agregar Miembros no rompió nada de Inscripciones?**
+
+Que las rutas o endpoints hechos en la practica anterior siguen funcionando
